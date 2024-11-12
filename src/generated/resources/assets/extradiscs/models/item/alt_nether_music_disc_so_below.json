@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "extradiscs:item/alt_nether_music_disc_so_below"
+  }
+}

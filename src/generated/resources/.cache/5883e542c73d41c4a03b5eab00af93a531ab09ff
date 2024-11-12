@@ -1,0 +1,11 @@
+// 1.20.1	2024-11-11T23:07:26.1034814	Tags for minecraft:item mod id extradiscs
+fc3c8bf714c99bc577739ba76b95aa7c4516645e data/extradiscs/tags/items/alt_nether_music_disc_drop.json
+30d015aa8f915f8914a3d1b0b63c5ef598e402b1 data/extradiscs/tags/items/creative_music_disc_drop.json
+122fba090b208e879a7b753e5d1c64b81340aea4 data/extradiscs/tags/items/deep_dark_music_disc_drop.json
+dec4bea07d498dd56fceefcac1e03da5a6e3ba68 data/extradiscs/tags/items/end_music_disc_drop.json
+31d16f3b91cfe7181a2ea0c8f5c572a0d9738d04 data/extradiscs/tags/items/menu_music_disc_drop.json
+718e8d5d76e6dfecdd6c5e80b6a89794b586671d data/extradiscs/tags/items/nether_music_disc_drop.json
+9a80894a67924e18508149397cfbdcc4ec75bebe data/extradiscs/tags/items/overworld_music_disc_drop.json
+fb3a0e9c0595888a8d5687963ad8b98ded5971c4 data/extradiscs/tags/items/underground_music_disc_drop.json
+910de4837224f562432b1be03a76963f79cab2aa data/extradiscs/tags/items/underwater_music_disc_drop.json
+fd53f08d11617509b25a7427e147c0993b4305ef data/minecraft/tags/items/music_discs.json
