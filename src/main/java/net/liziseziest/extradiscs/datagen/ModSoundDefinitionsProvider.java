@@ -20,7 +20,7 @@ public class ModSoundDefinitionsProvider extends SoundDefinitionsProvider {
     public void registerSounds() {
         soundRegistryMap.forEach((k, v) -> {
             this.add(() -> v, definition().with(
-                sound(new ResourceLocation(ExtraDiscs.MODID, "music/" + k.discType().filePath 
+                sound(new ResourceLocation("minecraft", "music/" + k.discType().filePath 
                     + (k.appender() == null ? "" : ("/" + k.appender())) + "/" + k.name())).stream()
             ));
         });
