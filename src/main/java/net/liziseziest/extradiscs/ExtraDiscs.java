@@ -10,6 +10,7 @@ import java.util.Map;
 import net.minecraft.advancements.critereon.EntityPredicate;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
@@ -21,13 +22,16 @@ import net.minecraft.world.level.storage.loot.entries.TagEntry;
 import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
+import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
 import net.minecraftforge.event.LootTableLoadEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -118,6 +122,7 @@ public class ExtraDiscs {
         SOUND_REGISTRY.register(modEventBus);
         MinecraftForge.EVENT_BUS.register(this);
         modEventBus.addListener(this::addCreative);
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ExtraDiscsConfig.SPEC);
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
@@ -151,6 +156,17 @@ public class ExtraDiscs {
             poolExtension.when(LootItemEntityPropertyCondition.hasProperties(
                     LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityType.SKELETON)
                 ));
+            event.getTable().addPool(poolExtension.build());
+        }
+
+        // 11 Special Rare Drop
+        if (ExtraDiscsConfig.discElevenDrop && mobKey.matches("entities/player")) {
+            LootPool.Builder poolExtension = LootPool.lootPool().setRolls(ConstantValue.exactly(1));
+            poolExtension.add(TagEntry.expandTag(ItemTags.create(new ResourceLocation(ExtraDiscs.MODID, "music_disc_11_drop"))))
+                .when(LootItemEntityPropertyCondition.hasProperties(
+                    LootContext.EntityTarget.KILLER, EntityPredicate.Builder.entity().of(EntityType.SKELETON)
+                ))
+                .when(LootItemRandomChanceCondition.randomChance((float) ExtraDiscsConfig.discElevenDropRate));
             event.getTable().addPool(poolExtension.build());
         }
     }
