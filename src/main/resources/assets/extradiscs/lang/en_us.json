@@ -8,6 +8,7 @@
     "item.extradiscs.alt_nether_music_disc": "Nether Music Disc",
     "item.extradiscs.end_music_disc": "End Music Disc",
     "item.extradiscs.menu_music_disc": "Menu Music Disc",
+    "item.extradiscs.oreo": "Oreo",
 
     "item.extradiscs.overworld_music_disc_calm1.desc": "C418 - Minecraft",
     "item.extradiscs.overworld_music_disc_calm2.desc": "C418 - Clark",
@@ -34,7 +35,7 @@
     
     "item.extradiscs.deep_dark_music_disc_ancestry.desc": "Lena Raine - Ancestry",
     
-    "item.extradiscs.underground_music_disc_aerie.desc": "Lena Raine - Aerie",
+    "item.extradiscs.overworld_music_disc_aerie.desc": "Lena Raine - Aerie",
     "item.extradiscs.underground_music_disc_a_familiar_room.desc": "Aaron Cherof - A Familiar Room",
     "item.extradiscs.underground_music_disc_an_ordinary_day.desc": "Kumi Tanioka - An Ordinary Day",
 

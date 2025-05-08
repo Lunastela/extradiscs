@@ -12,16 +12,14 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.tags.ItemTags;
 import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Rarity;
 import net.minecraft.world.level.storage.loot.LootContext;
 import net.minecraft.world.level.storage.loot.LootPool;
-import net.minecraft.world.level.storage.loot.LootTable;
-import net.minecraft.world.level.storage.loot.entries.LootPoolEntryContainer;
 import net.minecraft.world.level.storage.loot.entries.TagEntry;
-import net.minecraft.world.level.storage.loot.functions.SetItemCountFunction;
 import net.minecraft.world.level.storage.loot.predicates.LootItemEntityPropertyCondition;
-import net.minecraft.world.level.storage.loot.predicates.LootItemKilledByPlayerCondition;
 import net.minecraft.world.level.storage.loot.predicates.LootItemRandomChanceCondition;
 import net.minecraft.world.level.storage.loot.providers.number.ConstantValue;
 import net.minecraftforge.common.MinecraftForge;
@@ -43,6 +41,7 @@ import org.slf4j.Logger;
 public class ExtraDiscs {
     public static final String MODID = "extradiscs";
     public static final Logger LOGGER = LogUtils.getLogger();
+    public static boolean OverrideMonoMusic = false;
 
     public static final DeferredRegister<Item> ITEM_REGISTRY = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
     public static final DeferredRegister<SoundEvent> SOUND_REGISTRY = DeferredRegister.create(ForgeRegistries.SOUND_EVENTS, MODID);
@@ -116,6 +115,16 @@ public class ExtraDiscs {
     public static final RegistryObject<Item> BEGINNING_2 = TypedRecordItem.registerDisc(DiscType.MENU_DISC, "menu3", 2, 175);
     public static final RegistryObject<Item> FLOATING_TREES = TypedRecordItem.registerDisc(DiscType.MENU_DISC, "menu4", 3, 244);
 
+    public static final RegistryObject<Item> OREO = ITEM_REGISTRY.register("oreo", () -> 
+        new Item(
+            new Item.Properties()
+                .stacksTo(64).rarity(Rarity.RARE)
+                .food((new FoodProperties.Builder())
+                .nutrition(2).saturationMod(0.1F)
+                .alwaysEat().build()
+        ))
+    );
+
     public ExtraDiscs() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         ITEM_REGISTRY.register(modEventBus);
@@ -126,10 +135,13 @@ public class ExtraDiscs {
     }
 
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
-        if(event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
+        if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
             for (int i = 0; i < itemRegistryList.size(); i++)
                 event.accept(itemRegistryList.get(i));
         }
+
+        if (event.getTabKey() == CreativeModeTabs.FOOD_AND_DRINKS)
+            event.accept(OREO);
     }
 
     Map<String, DiscType[]> mobDropMap = new HashMap<String, DiscType[]>() {{
